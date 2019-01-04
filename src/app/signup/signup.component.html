@@ -1,0 +1,27 @@
+<div *ngIf="admin==true" class="module signup">
+  <div class="heading">
+    <h2>Sign up</h2>
+  </div>
+  <br />
+  <div>
+    <label class="inputLabel">Email
+      <br />
+      <input class="input" #email placeholder="email..." required>
+    </label>
+    <label class="inputLabel">Username
+      <br />
+      <input class="input" #username placeholder="username..." required>
+    </label>
+    <br />
+    <label class="inputLabel">Password
+      <br />
+      <input type="password" class="input" #password placeholder="password...">
+    </label>
+    <br />
+  </div>
+  <br />
+  <button class="submitButton" (click)="add(email.value, username.value, password.value); email.value=''; username.value=''; password.value=''">
+    Submit
+  </button>
+  <button class="submitButton" (click)="goBack()">Go Back</button>
+</div>

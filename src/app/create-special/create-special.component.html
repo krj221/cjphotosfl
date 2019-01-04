@@ -1,0 +1,66 @@
+<div *ngIf="admin==true" class="module create-special">
+  <div class="heading">
+    <h2>Special Details</h2>
+  </div>
+  <br />
+  <label class="inputLabel">Special Type
+    <br />
+    <input class="input" #inSpecialType placeholder="Special Name">
+  </label>
+  <br />
+  <label class="inputLabel">Image Location
+    <br />
+    <input class="input" #inPhotoDir placeholder="Image Location">
+  </label>
+  <br />
+  <label class="inputLabel">Description
+    <br />
+    <input class="input" #description placeholder="Description">
+  </label>
+  <br />
+
+  <!-- <div class="mat-div">
+    <mat-form-field class="mat-input-1">
+      <mat-select #inSpecialType placeholder="Choose type" required>
+        <mat-option *ngFor="let specialType of specialTypes" [(value)]="specialType.name">
+          {{specialType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div> -->
+  <!-- <br /> -->
+  <label class="inputLabel">Date & Times</label>
+  <br />
+  <!-- <div class="mat-div" *ngFor="let date of dates" > -->
+    <!-- <mat-form-field class="mat-input-1">
+      <input matInput [matDatepicker]="date.value" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="date.value"></mat-datepicker-toggle>
+      <mat-datepicker #date.value></mat-datepicker>
+    </mat-form-field> -->
+  <div class="mat-div" *ngFor="let date of dates; let i = index;">
+    <mat-form-field class="mat-input-1">
+      <input matInput [matDatepicker]="i" placeholder="Choose a date" [(ngModel)]="date.value">
+      <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
+      <mat-datepicker #i></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="mat-input-1">
+      <mat-select placeholder="Choose times" [(ngModel)]="date.times" multiple>
+        <mat-option *ngFor="let time of pickTimes" [value]="time">
+          {{convertTime(time.value)}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button class="addButton" (click)="addDate()">
+    <strong>+</strong>
+  </button>
+  <button class="removeButton" (click)="removeDate()">
+    <strong>-</strong>
+  </button>
+  <br />
+  <br />
+  <button class="submitButton" (click)="add(inSpecialType.value, inPhotoDir.value, description.value); inSpecialType.value=''; inPhotoDir.value=''; description.value=''">
+    Submit
+  </button>
+  <button class="submitButton" (click)="goBack()">Go Back</button>
+</div>

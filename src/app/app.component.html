@@ -1,0 +1,24 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<!-- <div class="main-div"> -->
+  <div class='coverPhoto'>
+    <img class='image1' alt="Angular Logo" src="assets/img/logo.jpg">
+  </div><br />
+  <div *ngIf="admin==true" class="nav-div">
+    <nav>
+      <a class='navigation' routerLink="/dashboard">Home</a>
+      <a class='navigation' routerLink="/appts-by-specials">Appointments</a>
+      <a class='navigation' routerLink="/specials">Specials</a>
+      <a class='navigation' (click)="logout()">Logout</a>
+    </nav>
+  </div>
+  <div *ngIf="admin==false" class="nav-div2">
+    <nav>
+      <a class='navigation' routerLink="/dashboard">Home</a>
+    </nav>
+  </div>
+  <br />
+      <router-outlet></router-outlet>
+      <!-- <app-messages></app-messages> -->
+      <app-footer></app-footer>
+<!-- </div> -->

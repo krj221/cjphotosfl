@@ -1,0 +1,29 @@
+<!-- <h2>My Appointments</h2>
+<ul class="appointments">
+  <li *ngFor="let appointment of appointments">
+    <a routerLink="/detail/{{appointment._id}}">
+      <label class="inputLabel">First Name
+        <br />
+        <h2>{{appointment.first}}</h2>
+      </label>
+      <span class="badge">{{convertDate(appointment.date)}} at {{convertTime(appointment.time)}}</span> {{appointment.first}}
+    </a>
+    <button class="delete" title="delete appointment"
+      (click)="delete(appointment)">x</button>
+  </li>
+</ul> -->
+
+<div *ngIf="special && admin==true" class="module appointments">
+  <div class="heading">
+    <h2>Appointments for {{special.name}} Special</h2>
+  </div>
+  <br />
+  <div class="appts-div" *ngFor="let appointment of appointments" routerLink="/detail/{{appointment._id}}">
+      <p class="detail">Name: {{appointment.first + ' ' + appointment.last}}</p>
+      <!-- <p class="detail">Email: {{appointment.email}}</p>
+      <p class="detail">Phone Number: {{convertPhone(appointment.phone)}}</p> -->
+      <p class="detail">Date: {{convertDate(appointment.date)}}</p>
+      <p class="detail">Time: {{convertTime(appointment.time)}}</p>
+  </div>
+  <br />
+</div>

@@ -1,0 +1,151 @@
+
+
+/* .main-div {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #000;
+  border-radius: 6px;
+  padding: 20px;
+  background-color: #EE82EE;
+} */
+
+.background-pic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* width: auto; */
+  border-style: solid;
+  border-width: 5px;
+  border-color: #000;
+  border-radius: 6px;
+  /* margin: 2.0em 2.0em 2.0em 2.0em; */
+}
+
+.nav-div {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  /* width: 580px; */
+  max-width: 660px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #000;
+  border-radius: 6px;
+  padding: 5px;
+  /* background-color: #94cdff; */
+  background-color: rgba(116, 0, 179, 0.81);
+}
+.nav-div2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  /* width: 580px; */
+  max-width: 140px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #000;
+  border-radius: 6px;
+  padding: 5px;
+  /* background-color: #94cdff; */
+  background-color: rgba(116, 0, 179, 0.81);
+}
+
+.navigation {
+  color: #FFF;
+  cursor: pointer;
+  position: relative;
+  background-color: #94cdff;
+  margin: .5em;
+  padding: .5em;
+  /* height: 1.6em;  */
+  border-style: solid;
+  border-width: 3px;
+  border-color: #000;
+  border-radius: 5px;
+  /* top: -8px; */
+  -moz-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+  -webkit-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+}
+
+.coverPhoto {
+  border-style: solid;
+  border-width: 7px;
+  border-color: #000;
+  border-radius: 6px;
+  margin: 0 auto;
+  text-align: center;
+  max-height: 380px;
+  max-width: 580px;
+  /* background-color: #94cdff; */
+  background-color: rgba(116, 0, 179, 0.81);
+  /* margin: 0em 0em 2.0em 0em; */
+  padding: .5em .5em;
+}
+
+
+.image1 {
+  border-style: solid;
+  border-width: 5px;
+  border-color: #000;
+  border-radius: 6px;
+  max-height: 320px;
+  max-width: 500px;
+  margin: 1.0em 1.0em 1.0em 1.0em;
+  height: 50.67%;
+  width: 75.67%;
+}
+
+/* AppComponent's private CSS styles */
+h1 {
+  font-size: 1.2em;
+  color: #999;
+  margin-bottom: 0;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+h2 {
+  font-size: 2em;
+  margin-top: 0;
+  padding-top: 0;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+nav a {
+  padding: 10px 10px;
+  font-size: 26px;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #94cdff;
+  color: #FFF;
+  border-radius: 4px;
+  width: auto;
+  max-height: 30px;
+}
+nav a:visited, a:link {
+  color: #FFF;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+nav a:hover {
+  /* color: #039be5; */
+  font-style: italic;
+  background-color: #505;
+  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+}
+nav a.active {
+  color: #039be5;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}

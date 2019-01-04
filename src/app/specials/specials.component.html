@@ -1,0 +1,25 @@
+<div *ngIf="admin==true">
+  <div class="module special">
+    <a class="book-christmas" routerLink="/create-special">
+      <div class="create-special">
+        <h2>Create Special</h2>
+      </div>
+    </a>
+  </div>
+  <div class="module special" *ngFor="let special of specials">
+    <h3>{{special.name}} Special</h3>
+    <a class='photo' style="text-align:center" routerLink="/special-detail/{{special._id}}">
+      <img class='photo1' alt="{{special.name}}" src="{{special.photoDir}}">
+    </a><br/>
+    <div class="desc-div" *ngIf="special.description != null">
+      <label class="inputLabel">Details</label><br />
+      <p class="description">{{special.description}}</p>
+    </div>
+    <br/>
+    <a class="book-christmas" routerLink="/special-detail/{{special._id}}">
+        <div class="specials">
+          <h2>Select</h2>
+        </div>
+    </a>
+  </div>
+</div>

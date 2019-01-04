@@ -1,0 +1,63 @@
+<div *ngIf="special" class="module book-detail">
+  <div class="heading">
+    <h2>Book Appointment</h2>
+  </div>
+  <br />
+  <div>
+    <label class="inputLabel">First Name
+      <br />
+      <input class="input" #appointmentFirst placeholder="first name..." required>
+    </label>
+    <br />
+    <label class="inputLabel">Last Name
+      <br />
+      <input class="input" #appointmentLast placeholder="last name...">
+    </label>
+    <br />
+    <label class="inputLabel">Email
+      <br />
+      <input class="input" #appointmentEmail placeholder="email...">
+    </label>
+    <br />
+    <label class="inputLabel">Phone Number
+      <br />
+      <input class="input" #appointmentPhone placeholder="XXXXXXXXXX">
+    </label>
+    <br />
+    <label class="inputLabel">Date & Time</label>
+    <br />
+    <div class="mat-div">
+      <mat-form-field class="mat-input-1">
+        <mat-select #appointmentDate placeholder="Choose a date" required>
+          <mat-option *ngFor="let date of special.dates" [(value)]="date.value">
+            {{convertDate(date.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="mat-input-2">
+        <mat-select #appointmentTime placeholder="Choose a time" [disabled]="appointmentDate.value == null" >
+          <mat-option *ngFor="let time of special.dates[getDateIndex(appointmentDate.value, special)].times" [(value)]="time.value" [disabled]="time.isBooked === true">
+            {{convertTime(time.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <br />
+  <button class="submitButton" (click)="add(appointmentFirst.value, appointmentLast.value, appointmentEmail.value, appointmentPhone.value, appointmentDate.value, appointmentTime.value); appointmentFirst.value=''; appointmentLast.value=''; appointmentEmail.value=''; appointmentPhone.value=''; appointmentDate.value=''; appointmentTime.value=''">
+    Submit
+  </button>
+  <button class="submitButton" (click)="goBack()">Go Back</button>
+</div>
+
+<!-- <h2>My Appointments</h2>
+<ul class="appointments">
+  <li *ngFor="let appointment of appointments">
+    <a routerLink="/detail/{{appointment._id}}">
+      <span class="badge">{{appointment._id}}</span> {{appointment.first}} <br /> {{appointment.last}} <br /> {{appointment.email}}
+    </a>
+    <button class="delete" title="delete appointment"
+      (click)="delete(appointment)">x</button>
+  </li>
+</ul> -->

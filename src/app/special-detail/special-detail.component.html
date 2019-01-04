@@ -1,0 +1,57 @@
+<div *ngIf="special && admin==true" class="module special-detail">
+  <h2>Special Details</h2>
+  <label class="inputLabel">Name
+    <br />
+    <input class="input" [(ngModel)]="special.name" placeholder="name">
+  </label>
+  <br />
+  <label class="inputLabel">Photo Directory
+    <br />
+    <input class="input" [(ngModel)]="special.photoDir" placeholder="photo directory">
+  </label>
+  <br />
+  <label class="inputLabel">Description
+    <br />
+    <input class="input" [(ngModel)]="special.description" placeholder="description">
+  </label>
+  <br />
+  <!-- <label class="inputLabel">Date & Times</label>
+  <br /> -->
+  <!-- <div class="mat-div" *ngFor="let date of dates" > -->
+    <!-- <mat-form-field class="mat-input-1">
+      <input matInput [matDatepicker]="date.value" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="date.value"></mat-datepicker-toggle>
+      <mat-datepicker #date.value></mat-datepicker>
+    </mat-form-field> -->
+  <!-- <div class="mat-div" *ngFor="let date of special.dates; let i = index;">
+    <mat-form-field class="mat-input-1">
+      <input matInput [matDatepicker]="i" placeholder="{{date.value}}" [(ngModel)]="date.value">
+      <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
+      <mat-datepicker #i></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="mat-input-1">
+      <mat-select placeholder="Choose times" [(ngModel)]="date.times" multiple>
+        <mat-option *ngFor="let time of pickTimes" [value]="time">
+          {{convertTime(time.value)}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div> -->
+  <!-- <button class="addButton" (click)="addDate()">
+    <strong>+</strong>
+  </button>
+  <button class="removeButton" (click)="removeDate()">
+    <strong>-</strong>
+  </button> -->
+  <!-- <br /> -->
+  <br />
+  <button class="submitButton" (click)="save()">
+    Save
+  </button>
+  <button class="submitButton" (click)="goBack()">Go Back</button>
+  <br />
+  <button class="deleteButton" (click)="deleteSpecial()">Delete Special</button>
+
+  <!-- <button (click)="save()">save</button>
+  <button (click)="goBack()">go back</button> -->
+</div>

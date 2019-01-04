@@ -1,0 +1,23 @@
+<div class="module login">
+  <div class="heading">
+    <h2>Login</h2>
+  </div>
+  <br />
+  <div>
+    <label class="inputLabel">Email
+      <br />
+      <input class="input" #email placeholder="email..." required>
+    </label>
+    <br />
+    <label class="inputLabel">Password
+      <br />
+      <input type="password" class="input" #password placeholder="password...">
+    </label>
+    <br />
+  </div>
+  <br />
+  <button class="submitButton" (click)="add(email.value, password.value); email.value=''; password.value=''">
+    Login
+  </button>
+  <button class="submitButton" (click)="goBack()">Go Back</button>
+</div>

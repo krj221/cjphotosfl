@@ -1,0 +1,53 @@
+<div *ngIf="appointment && admin==true" class="module appointment-detail">
+  <h2>Appointment Details</h2>
+  <div class="appts-div">
+      <p class="detail">Name: {{appointment.first + ' ' + appointment.last}}</p>
+      <p class="detail">Email: {{appointment.email}}</p>
+      <p class="detail">Phone Number: {{convertPhone(appointment.phone)}}</p>
+  </div>
+  <!-- <div class="fullName"><span>Name: </span>{{appointment.first + ' ' + appointment.last}}</div>
+  <br />
+  <div class="fullName"><span>Email: </span>{{appointment.email}}</div>
+  <br />
+  <div class="fullName"><span>Phone: </span>{{convertPhone(appointment.phone)}}</div>
+  <br />
+  <div class="fullName"><span>Special Type: </span>{{special.name}}</div>
+  <br /> -->
+
+  <!-- <div>
+    <label>Date: {{appointment.date}}</label>
+  </div>
+  <div>
+    <label>Time: {{appointment.time}}</label>
+  </div> -->
+
+  <!-- [(ngModel)]="appointment.time" -->
+  <div class="mat-div">
+    <mat-form-field class="mat-input-1">
+      <mat-select [(ngModel)]="appointment.date" placeholder="Choose a date" required>
+        <mat-option *ngFor="let date of special.dates" [(value)]="date.value">
+          {{convertDate(date.value)}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="mat-input-2">
+      <mat-select [(ngModel)]="appointment.time" placeholder="Choose a time" [disabled]="appointment.date === null" >
+        <mat-option *ngFor="let time of special.dates[getDateIndex(appointment.date, special)].times" [(value)]="time.value" [disabled]="time.isBooked === true">
+          {{convertTime(time.value)}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <br />
+  <button class="submitButton" (click)="save()">
+    Save
+  </button>
+  <button class="submitButton" (click)="goBack()">Go Back</button>
+  <br />
+  <button class="cancelButton" (click)="cancelAppt()">Cancel Appointment</button>
+
+  <!-- <button (click)="save()">save</button>
+  <button (click)="goBack()">go back</button> -->
+</div>

@@ -1,0 +1,14 @@
+<div class="module appointment-search">
+  <div id="search-component">
+    <h3>Search by Email</h3>
+    <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+
+    <ul class="search-result">
+      <li *ngFor="let appointment of appointments$ | async" >
+        <a routerLink="/detail/{{appointment._id}}">
+          {{convertDate(appointment.date) + " at " + convertTime(appointment.time)}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
