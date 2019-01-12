@@ -126,8 +126,29 @@ export class SpecialDetailComponent implements OnInit {
     //     console.log('Times: ' + this.special.dates[j].times[k].value );
     //   }
     // }
-    this.specialService.updateSpecial(this.special)
-      .subscribe(() => this.goBack());
+
+    // TODO: Add code to get the appointments for this special
+    //        and mark each appointment as booked
+
+    // const appt = {
+    //   _id: '',
+    //   first: '',
+    //   last: '',
+    //   email: '',
+    //   phone: 0,
+    //   date: 0,
+    //   time: 0,
+    //   specialId: this.special._id
+    // };
+    // this.appointmentService.getAppointments(appt)
+    //   .subscribe(appointments => this.changeSpecialBookings(appointments, this.special, this.specialService, this.utilityService));
+
+    this.updateSpecial(this.special);
+    this.goBack();
+  }
+
+  updateSpecial(special: Special): void {
+    this.specialService.updateSpecial(special).subscribe();
   }
 
   deleteSpecial(): void {
@@ -163,6 +184,20 @@ export class SpecialDetailComponent implements OnInit {
         .subscribe(() => console.log('Appointment deleted with id: '+ appointment._id));
     });
   }
+  changeSpecialBookings(appointments: Appointment[], spec: Special, specService: SpecialService, utilService: UtilityService): void {
+    appointments.forEach(function(appointment) {
+      console.log(appointment.first);
+      console.log(appointment._id);
+      console.log("Changing date to: " + appointment.date);
+      console.log("Changing time to: " + appointment.time);
+      console.log("Spec to change: " + spec.name);
+
+      var dateIndex = utilService.getDateIndex(appointment.date, spec);
+      var timeIndex = utilService.getTimeIndex(appointment.time, dateIndex, spec);
+      spec.dates[dateIndex].times[timeIndex].isBooked = true;
+    });
+    specService.updateSpecial(spec);
+  }
 
   goBack(): void {
     this.location.back();
@@ -178,8 +213,20 @@ export class SpecialDetailComponent implements OnInit {
   }
 
 
+  private convertDate(date: number): string {
+    return this.utilityService.convertDate(date);
+  }
+
   private convertTime(time: number): string {
     return this.utilityService.convertTime(time);
+  }
+
+  private getDateIndex(date: number, special: Special): number {
+    return this.utilityService.getDateIndex(date, special);
+  }
+
+  private getTimeIndex(time: number, dateIndex: number, special: Special): number {
+    return this.utilityService.getTimeIndex(time, dateIndex, special);
   }
 
 }

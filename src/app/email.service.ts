@@ -34,7 +34,8 @@ export class EmailService {
         "specialName": appointment.specialName,
         "date": appointment.dateConverted,
         "time": appointment.timeConverted,
-        "phone": appointment.phoneConverted
+        "phone": appointment.phoneConverted,
+        "errorMesg": appointment.errorMesg
     }
 
     return this.http.post(this.emailUrl, appt, httpOptions).pipe(

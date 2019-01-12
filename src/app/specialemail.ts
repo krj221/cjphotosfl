@@ -6,4 +6,5 @@ export class Specialemail {
   dateConverted: string;
   timeConverted: string;
   phoneConverted: string;
+  errorMesg: string;
 }

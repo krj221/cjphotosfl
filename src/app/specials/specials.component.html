@@ -8,8 +8,14 @@
   </div>
   <div class="module special" *ngFor="let special of specials">
     <h3>{{special.name}} Special</h3>
-    <a class='photo' style="text-align:center" routerLink="/special-detail/{{special._id}}">
+    <!-- <a class='photo' style="text-align:center" routerLink="/special-detail/{{special._id}}">
       <img class='photo1' alt="{{special.name}}" src="{{special.photoDir}}">
+    </a><br/> -->
+    <a class='photo' *ngIf="special.photoDir != ''" style="text-align:center" routerLink="/special-detail/{{special._id}}">
+      <img class='photo1' alt="{{special.name}}" src="{{special.photoDir}}">
+    </a><br/>
+    <a class='photo' *ngIf="special.photoDir == ''" style="text-align:center" routerLink="/special-detail/{{special._id}}">
+      <img class='photo1' alt="{{special.name}}" src="assets/img/cjphotos.png">
     </a><br/>
     <div class="desc-div" *ngIf="special.description != null">
       <label class="inputLabel">Details</label><br />

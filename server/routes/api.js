@@ -292,13 +292,17 @@ router.post('/specials', (req, res) => {
 
 // send email
 router.post('/email', (req, res) => {
+  var htmlMesg = req.body.fullName + " just confirmed a " + req.body.specialName + " Special on " + req.body.date + " at " + req.body.time
+          + "<br /><br />Send an invoice to their email: " + req.body.email
+          + "<br />Phone number: " + req.body.phone;
+  if (req.body.errorMesg){
+    htmlMesg = "<strong>"+ req.body.errorMesg +"</strong><br />" + htmlMesg;
+  }
   let payload = {
     "to": "cjphotosfl@gmail.com",
     "subject": "Appointment Confirmation",
     // "text": "hello world!",
-    "html": req.body.fullName + " just confirmed a " + req.body.specialName + " Special on " + req.body.date + " at " + req.body.time
-            + "<br /><br />Send an invoice to their email: " + req.body.email
-            + "<br />Phone number: " + req.body.phone,
+    "html": htmlMesg,
     "from": "Crystal Johnson Photography <cjohnson0992@gmail.com>"
   };
 

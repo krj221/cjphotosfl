@@ -2,8 +2,8 @@
   <h2>Appointment Details</h2>
   <div class="appts-div">
       <p class="detail">Name: {{appointment.first + ' ' + appointment.last}}</p>
-      <p class="detail">Email: {{appointment.email}}</p>
-      <p class="detail">Phone Number: {{convertPhone(appointment.phone)}}</p>
+      <p class="detail">Email: <a href="mailto:{{appointment.email}}">{{appointment.email}}</a></p>
+      <p class="detail">Phone Number: <a href="tel:{{convertPhone(appointment.phone)}}">{{convertPhone(appointment.phone)}}</a></p>
   </div>
   <!-- <div class="fullName"><span>Name: </span>{{appointment.first + ' ' + appointment.last}}</div>
   <br />

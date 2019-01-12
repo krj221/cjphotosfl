@@ -88,17 +88,21 @@ export class BookDetailComponent implements OnInit {
     this.value = value;
   }
 
-  add(first: string, last: string, email: string, phone: number, date: number, time: number): void {
+  add(first: string, last: string, email: string, phoneString: string, date: number, time: number): void {
     first = first.trim().toUpperCase();
     last = last.trim().toUpperCase();
     email = email.trim().toUpperCase();
+    var alertMessage = ' ';
+    var invalidPhone = false;
+    // var phoneString = phone1.trim() + phone2.trim() + phone3.trim();
+    // phone = parseInt(phoneString);
+
+    var phone = this.validatePhone(phoneString);
 
     var invalidFirst = false;
     var invalidEmail = false;
-    var invalidPhone = false;
     var invalidDate = false;
     var invalidTime = false;
-    var alertMessage = ' ';
     var specialId = this.route.snapshot.paramMap.get('id');
 
     console.log("Special ID is: " + specialId);
@@ -109,12 +113,16 @@ export class BookDetailComponent implements OnInit {
     }
     if (!email || !(this.utilityService.checkEmail(email))){
       invalidEmail = true;
-      alertMessage += '\nEmail is invalid';
+      // alertMessage += '\nEmail is invalid';
     }
-    if (!phone || (phone < 999999999)){
+    if (!phone){
       invalidPhone = true;
-      alertMessage += '\nPhone number must be at least 10 digits';
+      // alertMessage += '\nPlease enter a phone number';
     }
+    // else if (phone < 999999999){
+    //   invalidPhone = true;
+    //   alertMessage += '\nPhone number must be at least 10 digits';
+    // }
     if (date == null || date.toString() == '' ){
       invalidDate = true;
       alertMessage += '\nPlease select a date';
@@ -122,6 +130,16 @@ export class BookDetailComponent implements OnInit {
     if (time == null || time.toString() == '' ){
       invalidTime = true;
       alertMessage += '\nPlease select a time';
+    }
+
+    if (invalidEmail && invalidPhone)
+    {
+      alertMessage += '\nYou must enter a valid email or phone number';
+    }
+    else
+    {
+        invalidEmail = false;
+        invalidPhone = false;
     }
 
     if (invalidFirst || invalidEmail || invalidPhone || invalidDate || invalidTime) {
@@ -135,17 +153,30 @@ export class BookDetailComponent implements OnInit {
 
     // confirmation box
     var confirmed = confirm("Confirm appointment for "+ dateConverted + ' at ' + timeConverted);
-
+    var apptCreateErr = false;
+    var errorMesg = ' ';
     if (confirmed){
 
       this.appointmentService.addAppointment({first, last, email, phone, date, time, specialId } as Appointment)
       .subscribe(appointment => {
         this.appointments.push(appointment);
+        console.log(appointment);
+        if (appointment == null)
+        {
+          apptCreateErr = true;
+          console.log("Appointment could not be created.");
+          errorMesg += "Appointment was not created for some reason...Sorry";
+        }
+        else
+        {
+          console.log("Appointment was created successfully!");
+          errorMesg += "Appointment created successfully!";
+        }
       });
 
       alert('Appointment created \n   ' +  dateConverted + ' at ' + timeConverted);
 
-      this.log(first + ' ' + last + ' ' + email + ' ' + phone + ' ' + date + ' ' + time );
+      this.log("Appointment details: " + first + ' ' + last + ', ' + email + ', ' + phone + ', ' + date + ', ' + time );
       var dateIndex = this.getDateIndex(date, this.special);
       var timeIndex = this.getTimeIndex(time, dateIndex, this.special);
       this.special.dates[dateIndex].times[timeIndex].isBooked = true;
@@ -156,9 +187,10 @@ export class BookDetailComponent implements OnInit {
       var lastName = last.toLowerCase();
       var phoneConverted = this.convertPhone(phone);
       var fullName = firstName[0].toUpperCase() + firstName.slice(1) + ' ' + lastName[0].toUpperCase() + lastName.slice(1);
-      this.emailService.emailNotification({fullName, email, dateConverted, timeConverted, specialName, phoneConverted } as Specialemail)
-      .subscribe(() => {
+      this.emailService.emailNotification({fullName, email, dateConverted, timeConverted, specialName, phoneConverted, errorMesg } as Specialemail)
+      .subscribe((response) => {
         console.log("Email has been sent!");
+
       });
 
       this.goBack();
@@ -187,6 +219,9 @@ export class BookDetailComponent implements OnInit {
 
   private convertDate(date: number): string {
     return this.utilityService.convertDate(date);
+  }
+  private validatePhone(phone: string): number {
+    return this.utilityService.validatePhone(phone);
   }
 
   private convertTime(time: number): string {

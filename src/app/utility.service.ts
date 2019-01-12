@@ -116,5 +116,12 @@ export class UtilityService {
     }
     return 0;
   }
+  // validate and convert phone number
+  validatePhone(phone: string): number {
+    console.log("Phone started as: " + phone);
+    var convertedPhone = phone.replace(/\D/g,'');
+    console.log("Phone has been converted: " + convertedPhone);
+    return parseInt(convertedPhone);
+  }
 
 }

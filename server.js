@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'dist/my-app')));
 // Set our api routes
 app.use('/api', api);
 
+
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/my-app/index.html'));
@@ -37,6 +38,13 @@ app.get('*', (req, res) => {
  */
 const port = process.env.PORT || '3000';
 app.set('port', port);
+
+app.use(function(req, res, next) {
+  if(!req.secure || port == '8080') {
+    return res.redirect('https://cjphotosfl.com');
+  }
+  next();
+});
 
 /**
  * Create HTTP server.
