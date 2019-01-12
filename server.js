@@ -28,23 +28,23 @@ app.use(express.static(path.join(__dirname, 'dist/my-app')));
 app.use('/api', api);
 
 
+app.use(function(req, res, next) {
+  if(!req.secure) {
+    return res.redirect('https://cjphotosfl.com');
+  }
+  next();
+});
+
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/my-app/index.html'));
 });
 
 /**
- * Get port from environment and store in Express.
- */
+* Get port from environment and store in Express.
+*/
 const port = process.env.PORT || '3000';
 app.set('port', port);
-
-app.use(function(req, res, next) {
-  if(!req.secure || port == '8080') {
-    return res.redirect('https://cjphotosfl.com');
-  }
-  next();
-});
 
 /**
  * Create HTTP server.
