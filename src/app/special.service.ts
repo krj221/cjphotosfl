@@ -72,19 +72,29 @@ export class SpecialService {
   }
   //
   // /** POST: add a new hero to the server */
-  addSpecial (special: Special): Observable<Special> {
-    return this.http.post<Special>(this.specialsUrl, special, httpOptions).pipe(
+  addSpecial (special: Special, token: string): Observable<Special> {
+    const httpOptionsAuth = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                                'auth_token':token})
+    };
+
+    return this.http.post<Special>(this.specialsUrl, special, httpOptionsAuth).pipe(
       tap((special: Special) => this.log(`added special`)),
       catchError(this.handleError<Special>('addSpecial'))
     );
   }
   //
   // /** DELETE: delete the hero from the server */
-  deleteSpecial (special: Special | string): Observable<Special> {
+  deleteSpecial (special: Special | string, token: string): Observable<Special> {
     const id = typeof special === 'string' ? special : special._id;
     const url = `${this.specialsUrl}/${id}`;
 
-    return this.http.delete<Special>(url, httpOptions).pipe(
+    const httpOptionsAuth = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                                'auth_token':token})
+    };
+
+    return this.http.delete<Special>(url, httpOptionsAuth).pipe(
       tap(_ => this.log(`deleted special id=${id}`)),
       catchError(this.handleError<Special>('deleteSpecial'))
     );

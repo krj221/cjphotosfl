@@ -54,9 +54,6 @@ export class AuthService {
 
   isAuthorized(i: string, s: string, a: string, token: string): Observable<any> {
     var tokenDetails = new TokenDetails();
-    tokenDetails.issuer = i;
-    tokenDetails.subject = s;
-    tokenDetails.audience = a;
     tokenDetails.token = token;
 
     return this.http.post(this.authUrl, tokenDetails).pipe(

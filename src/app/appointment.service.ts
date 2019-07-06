@@ -74,29 +74,40 @@ export class AppointmentService {
   }
 
   /** PUT: update the appointment on the server */
-  updateAppointment (appointment: Appointment): Observable<any> {
+  updateAppointment (appointment: Appointment, token: string): Observable<any> {
     const url = `${this.appointmentsUrl}/${appointment._id}`;
     console.log('Url for get is: ' + url);
-    return this.http.put(url, appointment, httpOptions).pipe(
+
+    const httpOptionsAuth = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                                'auth_token':token})
+    };
+
+    return this.http.put(url, appointment, httpOptionsAuth).pipe(
       tap(_ => this.log(`updated appointment id=${appointment._id}`)),
       catchError(this.handleError<any>('updateAppointment'))
     );
   }
 
   /** POST: add a new hero to the server */
-  addAppointment (appointment: Appointment): Observable<Appointment> {
+  addAppointment (appointment: Appointment): Observable<any> {
     return this.http.post<Appointment>(this.appointmentsUrl, appointment, httpOptions).pipe(
-      tap((appointment: Appointment) => this.log(`added appointment`)),
-      catchError(this.handleError<Appointment>('addAppointment'))
+      tap((response: any) => this.log(`added appointment`)),
+      catchError(this.handleError<any>('addAppointment'))
     );
   }
 
   /** DELETE: delete the hero from the server */
-  deleteAppointment (appointment: Appointment | string): Observable<Appointment> {
+  deleteAppointment (appointment: Appointment | string, token: string): Observable<Appointment> {
     const id = typeof appointment === 'string' ? appointment : appointment._id;
     const url = `${this.appointmentsUrl}/${id}`;
 
-    return this.http.delete<Appointment>(url, httpOptions).pipe(
+    const httpOptionsAuth = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                                'auth_token':token})
+    };
+
+    return this.http.delete<Appointment>(url, httpOptionsAuth).pipe(
       tap(_ => this.log(`deleted appointment id=${id}`)),
       catchError(this.handleError<Appointment>('deleteAppointment'))
     );

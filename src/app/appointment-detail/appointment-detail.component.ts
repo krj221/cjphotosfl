@@ -111,8 +111,38 @@ export class AppointmentDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.appointmentService.updateAppointment(this.appointment)
+
+    var authDetails = JSON.parse(localStorage.getItem("authDetails"));
+    if (this.appointment.first != null)
+    {
+      this.appointment.first = this.appointment.first.trim().toUpperCase();
+    }
+    if (this.appointment.last != null)
+    {
+      this.appointment.last = this.appointment.last.trim().toUpperCase();
+    }
+    if (this.appointment.email != null)
+    {
+      this.appointment.email = this.appointment.email.trim().toUpperCase();
+    }
+
+    if (this.appointment.phone != null)
+    {
+      this.appointment.phone = this.validatePhone(this.appointment.phone.toString());
+    }
+
+    try
+    {
+      this.appointmentService.updateAppointment(this.appointment, authDetails.idToken)
       .subscribe(() => this.goBack());
+    }
+    catch(e)
+    {
+      console.log(e);
+      alert("Error: Appointment not updated - User was logged out, please login again");
+      return;
+    }
+
 
     var dateIndex = this.getDateIndex(this.appointment.date, this.special);
     var timeIndex = this.getTimeIndex(this.appointment.time, dateIndex, this.special);
@@ -128,9 +158,19 @@ export class AppointmentDetailComponent implements OnInit {
     var confirmed = confirm("Are you sure you want to delete this appointment?");
 
     if (confirmed){
+      var authDetails = JSON.parse(localStorage.getItem("authDetails"));
 
-      this.appointmentService.deleteAppointment(this.appointment)
-      .subscribe(() => this.goBack());
+      try
+      {
+        this.appointmentService.deleteAppointment(this.appointment, authDetails.idToken)
+        .subscribe(() => this.goBack());
+      }
+      catch(e)
+      {
+        console.log(e);
+        alert("Error: could not delete appointment - User was logged out, please login again");
+        return;
+      }
 
       this.special.dates[this.saveDateIndex].times[this.saveTimeIndex].isBooked = false;
       console.log('Set savedate and savetime with true');
@@ -171,6 +211,10 @@ export class AppointmentDetailComponent implements OnInit {
 
   private getTimeIndex(time: number, dateIndex: number, special: Special): number {
     return this.utilityService.getTimeIndex(time, dateIndex, special);
+  }
+
+  private validatePhone(phone: string): number {
+    return this.utilityService.validatePhone(phone);
   }
 
   goBack(): void {

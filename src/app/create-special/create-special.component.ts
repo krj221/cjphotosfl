@@ -157,10 +157,22 @@ export class CreateSpecialComponent implements OnInit {
 
       var dates = this.dates;
 
-      this.specialService.addSpecial({name, photoDir, description, dates } as Special)
-      .subscribe(special => {
-        this.specials.push(special);
-      });
+      var authDetails = JSON.parse(localStorage.getItem("authDetails"));
+
+      try
+      {
+        this.specialService.addSpecial({name, photoDir, description, dates } as Special, authDetails.idToken)
+        .subscribe(special => {
+          this.specials.push(special);
+        });
+      }
+      catch(e)
+      {
+        console.log(e);
+        alert("Error: Special not created - User was logged out, please login again");
+        return;
+      }
+
 
       alert('Special created');
 

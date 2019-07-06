@@ -43,10 +43,16 @@ export class UserService {
   }
 
   /** PUT: update the user on the server */
-  updateUser (user: User): Observable<any> {
+  updateUser (user: User, token: string): Observable<any> {
     const url = `${this.usersUrl}/${user._id}`;
     console.log('Url for get is: ' + url);
-    return this.http.put(url, user, httpOptions).pipe(
+
+    const httpOptionsAuth = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                                'auth_token':token})
+    };
+
+    return this.http.put(url, user, httpOptionsAuth).pipe(
       tap(_ => this.log(`updated user id=${user._id}`)),
       catchError(this.handleError<any>('updateUser'))
     );
@@ -61,15 +67,15 @@ export class UserService {
   }
   //
   // /** DELETE: delete the hero from the server */
-  deleteUser (user: User | string): Observable<User> {
-    const id = typeof user === 'string' ? user : user._id;
-    const url = `${this.usersUrl}/${id}`;
-
-    return this.http.delete<User>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted user id=${id}`)),
-      catchError(this.handleError<User>('deleteUser'))
-    );
-  }
+  // deleteUser (user: User | string): Observable<User> {
+  //   const id = typeof user === 'string' ? user : user._id;
+  //   const url = `${this.usersUrl}/${id}`;
+  //
+  //   return this.http.delete<User>(url, httpOptions).pipe(
+  //     tap(_ => this.log(`deleted user id=${id}`)),
+  //     catchError(this.handleError<User>('deleteUser'))
+  //   );
+  // }
   //
   // /* GET heroes whose name contains search term */
   // searchUsers(term: string): Observable<User[]> {

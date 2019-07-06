@@ -39,10 +39,10 @@ export class LoginComponent implements OnInit {
     // this.getUsers();
   }
 
-  save(): void {
-    this.userService.updateUser(this.user)
-      .subscribe(() => this.goBack());
-  }
+  // save(): void {
+  //   this.userService.updateUser(this.user)
+  //     .subscribe(() => this.goBack());
+  // }
 
   private get disabledV():string {
     return this._disabledV;

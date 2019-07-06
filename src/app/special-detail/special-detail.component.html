@@ -1,5 +1,8 @@
 <div *ngIf="special && admin==true" class="module special-detail">
-  <h2>Special Details</h2>
+  <div class="heading">
+    <h2>Special Details</h2>
+  </div>
+  <br />
   <label class="inputLabel">Name
     <br />
     <input class="input" [(ngModel)]="special.name" placeholder="name">
@@ -15,7 +18,7 @@
     <input class="input" [(ngModel)]="special.description" placeholder="description">
   </label>
   <br />
-  <!-- <label class="inputLabel">Date & Times</label>
+  <label class="inputLabel">Date & Times</label>
   <br />
   <div class="mat-div" *ngFor="let date of special.dates; let i = index;">
     <mat-form-field class="mat-input-1">
@@ -25,7 +28,7 @@
     </mat-form-field>
     <mat-form-field class="mat-input-1">
       <mat-select placeholder="Choose times" [(ngModel)]="date.times" multiple>
-        <mat-option *ngFor="let time of pickTimes" [value]="time">
+        <mat-option *ngFor="let time of pickTimes" [value]="time" >
           {{convertTime(time.value)}}
         </mat-option>
       </mat-select>
@@ -37,7 +40,7 @@
   <button class="removeButton" (click)="removeDate()">
     <strong>-</strong>
   </button>
-  <br /> -->
+  <br />
   <br />
   <button class="submitButton" (click)="save()">
     Save

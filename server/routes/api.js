@@ -63,9 +63,6 @@ const User = mongoose.model('User', {
 
 const TokenDetails = mongoose.model('TokenDetails', {
     id: String,
-    issuer: String,
-    subject: String,
-    audience: String,
     token: String
   }
 );
@@ -114,16 +111,16 @@ router.post('/auth', (req, res) => {
   // console.log('Title: ' + req.query.title);
   var tokenDetails = new TokenDetails(req.body);
 
-  var i  = tokenDetails.issuer;          // Issuer
-  var s  = tokenDetails.subject;        // Subject
-  var a  = tokenDetails.audience;        // Subject
+  // var i  = tokenDetails.issuer;          // Issuer
+  // var s  = tokenDetails.subject;        // Subject
+  // var a  = tokenDetails.audience;        // Subject
   var token = tokenDetails.token;
-  console.log("Auth issuer: " + i);
-  console.log("Auth subject: " + s);
-  console.log("Auth audience: " + a);
+  // console.log("Auth issuer: " + i);
+  // console.log("Auth subject: " + s);
+  // console.log("Auth audience: " + a);
   console.log("Auth token: " + token);
 
-  var legit = isAuthorized(i, s, a, token);
+  var legit = isAuthorized(token);
 
   var authorized = legit != null ? true : false;
 
@@ -256,38 +253,80 @@ router.get('/specials/:specialId', (req, res) => {
 
 // create Appointment
 router.post('/appointments', (req, res) => {
-  var newAppt = new Appointment(req.body);
-  // save the user
-  newAppt.save(function(err) {
+
+  var date = req.body.date;
+  var time = req.body.time;
+
+  Appointment.find({ "date": { $eq: date }, "time": { $eq: time }, }, function(err, appointments) {
     if (err)
     {
       res.status(500).send(err);
     }
     else
     {
-      console.log('Appointment created!');
-      console.log(newAppt);
-      res.status(200).json({response:"Appointment created!"});
+      // object of all the users
+      // console.log('Query: ' + req.query.toString());
+      console.log(appointments);
+      if (appointments != null && appointments.length > 0)
+      {
+        console.log('Appointment found already, could not create appointment');
+        res.status(200).json({response:"booked"});
+      }
+      else
+      {
+        var newAppt = new Appointment(req.body);
+        // save the user
+        newAppt.save(function(err) {
+          if (err)
+          {
+            res.status(500).send(err);
+          }
+          else
+          {
+            console.log('Appointment created!');
+            console.log(newAppt);
+            res.status(200).json({response:"created"});
+          }
+        });
+      }
     }
   });
+
 });
 
 // create Special
 router.post('/specials', (req, res) => {
   var newSpecial = new Special(req.body);
-  // save the user
-  newSpecial.save(function(err) {
-    if (err)
-    {
-      res.status(500).send(err);
-    }
-    else
-    {
-      console.log('Special created!');
-      console.log(newSpecial);
-      res.status(200).json({response:"Special created!"});;
-    }
-  });
+
+  var token = req.header('auth_token')
+  console.log("Auth token: " + token);
+
+  var legit = isAuthorized(token);
+
+  var authorized = legit != null ? true : false;
+
+  if (authorized)
+  {
+    // save the special
+    newSpecial.save(function(err) {
+      if (err)
+      {
+        res.status(500).send(err);
+      }
+      else
+      {
+        console.log('Special created!');
+        console.log(newSpecial);
+        res.status(200).json({response:"Special created!"});;
+      }
+    });
+  }
+  else
+  {
+    unauthResponse = "User Unauthorized - " + token;
+    res.status(401).json({response:unauthResponse});
+  }
+
 });
 
 // send email
@@ -362,16 +401,8 @@ router.post('/login', (req, res) => {
         var payload = {
         };
 
-
-        var i  = 'cjphotos';          // Issuer
-        var s  = users[0].email;        // Subject
-        var a  = users[0].username; // Audience
-
         // SIGNING OPTIONS
         var signOptions = {
-         issuer:  i,
-         subject:  s,
-         audience:  a,
          expiresIn:  "12h",
          algorithm:  "RS256"
         };
@@ -388,9 +419,7 @@ router.post('/login', (req, res) => {
 
         res.status(200).json({
           idToken: jwtBearerToken,
-          expiresIn: 120,
-          subject: users[0].email,
-          audience: users[0].username
+          expiresIn: 120
         });        // send the JWT back to the user
         // TODO - multiple options available
       }
@@ -441,17 +470,34 @@ router.post('/users', (req, res) => {
 //  appointment
 router.put('/appointments/:appointmentId', (req, res) => {
   console.log("Appointment id: " + req.params.appointmentId);
-  Appointment.findByIdAndUpdate( req.params.appointmentId, req.body, function(err, appointment) {
-    if (err)
-    {
-      res.status(500).send(err);
-    }
-    else
-    {
-      // we have the d user returned to us
-      res.status(200).json({response:"Appointment d!"});;
-    }
-  });
+
+  var token = req.header('auth_token')
+  console.log("Auth token: " + token);
+
+  var legit = isAuthorized(token);
+
+  var authorized = legit != null ? true : false;
+
+  if (authorized)
+  {
+    Appointment.findByIdAndUpdate( req.params.appointmentId, req.body, function(err, appointment) {
+      if (err)
+      {
+        res.status(500).send(err);
+      }
+      else
+      {
+        // we have the d user returned to us
+        res.status(200).json({response:"Appointment d!"});;
+      }
+    });
+  }
+  else
+  {
+    unauthResponse = "User Unauthorized - " + token;
+    res.status(401).json({response:unauthResponse});
+  }
+
 });
 
 //  special
@@ -472,76 +518,137 @@ router.put('/specials/:specialId', (req, res) => {
 //  user
 router.put('/users/:userId', (req, res) => {
   console.log("User id: " + req.params.userId);
-  User.findByIdAndUpdate( req.params.userId, req.body, function(err, user) {
-    if (err)
-    {
-      res.status(500).send(err);
-    }
-    else
-    {
-      // we have the d user returned to us
-      res.status(200).json({response:"User d!"});;
-    }
-  });
+
+  var token = req.header('auth_token')
+  console.log("Auth token: " + token);
+
+  var legit = isAuthorized(token);
+
+  var authorized = legit != null ? true : false;
+
+  if (authorized)
+  {
+    User.findByIdAndUpdate( req.params.userId, req.body, function(err, user) {
+      if (err)
+      {
+        res.status(500).send(err);
+      }
+      else
+      {
+        // we have the d user returned to us
+        res.status(200).json({response:"User d!"});;
+      }
+    });
+  }
+  else
+  {
+    unauthResponse = "User Unauthorized - " + token;
+    res.status(401).json({response:unauthResponse});
+  }
+
 });
 
 // Delete appointment
 router.delete('/appointments/:appointmentId', (req, res) => {
-  Appointment.findByIdAndDelete(req.params.appointmentId, function(err) {
-    if (err)
-    {
-      res.status(500).send(err);
-    }
-    else
-    {
-      // we have deleted the user
-      console.log('Appointment deleted!');
-      res.status(200).json({response:"Appointment deleted!"});;
-    }
-  });
+
+  var token = req.header('auth_token')
+  console.log("Auth token: " + token);
+
+  var legit = isAuthorized(token);
+
+  var authorized = legit != null ? true : false;
+
+  if (authorized)
+  {
+    Appointment.findByIdAndDelete(req.params.appointmentId, function(err) {
+      if (err)
+      {
+        res.status(500).send(err);
+      }
+      else
+      {
+        // we have deleted the user
+        console.log('Appointment deleted!');
+        res.status(200).json({response:"Appointment deleted!"});;
+      }
+    });
+  }
+  else
+  {
+    unauthResponse = "User Unauthorized - " + token;
+    res.status(401).json({response:unauthResponse});
+  }
+
 });
 
 // Delete special
 router.delete('/specials/:specialId', (req, res) => {
-  Special.findByIdAndDelete(req.params.specialId, function(err) {
-    if (err)
-    {
-      res.status(500).send(err);
-    }
-    else
-    {
-      // we have deleted the user
-      console.log('Special deleted!');
-      res.status(200).json({response:"Special deleted!"});;
-    }
-  });
+  var token = req.header('auth_token')
+  console.log("Auth token: " + token);
+
+  var legit = isAuthorized(token);
+
+  var authorized = legit != null ? true : false;
+
+  if (authorized)
+  {
+    Special.findByIdAndDelete(req.params.specialId, function(err) {
+      if (err)
+      {
+        res.status(500).send(err);
+      }
+      else
+      {
+        // we have deleted the user
+        console.log('Special deleted!');
+        res.status(200).json({response:"Special deleted!"});;
+      }
+    });
+  }
+  else
+  {
+    unauthResponse = "User Unauthorized - " + token;
+    res.status(401).json({response:unauthResponse});
+  }
 });
 
 // Delete User
 router.delete('/users/:userId', (req, res) => {
-  User.findByIdAndDelete(req.params.userId, function(err) {
-    if (err)
-    {
-      res.status(500).send(err);
-    }
-    else
-    {
-      // we have deleted the user
-      console.log('User deleted!');
-      res.status(200).json({response:"User deleted!"});;
-    }
-  });
+  var token = req.header('auth_token')
+  console.log("Auth token: " + token);
+
+  var legit = isAuthorized(token);
+
+  var authorized = legit != null ? true : false;
+
+  if (authorized)
+  {
+    User.findByIdAndDelete(req.params.userId, function(err) {
+      if (err)
+      {
+        res.status(500).send(err);
+      }
+      else
+      {
+        // we have deleted the user
+        console.log('User deleted!');
+        res.status(200).json({response:"User deleted!"});;
+      }
+    });
+  }
+  else
+  {
+    unauthResponse = "User Unauthorized - " + token;
+    res.status(401).json({response:unauthResponse});
+  }
 });
 
 module.exports = router;
 
-function isAuthorized(i, s, a, token) {
+function isAuthorized(token) {
   var legit = null;
 
   var verifyOptions = {
-   issuer:  i,
-   subject:  s,
-   audience:  a,
    expiresIn:  "12h",
    algorithm:  ["RS256"]
   };

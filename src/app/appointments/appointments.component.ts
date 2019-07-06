@@ -96,10 +96,10 @@ export class AppointmentsComponent implements OnInit {
       });
   }
 
-  delete(appointment: Appointment): void {
-    this.appointments = this.appointments.filter(a => a !== appointment);
-    this.appointmentService.deleteAppointment(appointment).subscribe();
-  }
+  // delete(appointment: Appointment): void {
+  //   this.appointments = this.appointments.filter(a => a !== appointment);
+  //   this.appointmentService.deleteAppointment(appointment).subscribe();
+  // }
 
   private convertPhone(phone: number): string {
     return this.utilityService.convertPhone(phone);

@@ -94,10 +94,10 @@ export class SignupComponent implements OnInit {
         .subscribe(users => this.users = users);
   }
 
-  save(): void {
-    this.userService.updateUser(this.user)
-      .subscribe(() => this.goBack());
-  }
+  // save(): void {
+  //   this.userService.updateUser(this.user)
+  //     .subscribe(() => this.goBack());
+  // }
 
   private get disabledV():string {
     return this._disabledV;
@@ -168,10 +168,10 @@ export class SignupComponent implements OnInit {
     this.location.back();
   }
 
-  delete(user: User): void {
-    this.users = this.users.filter(a => a !== user);
-    this.userService.deleteUser(user).subscribe();
-  }
+  // delete(user: User): void {
+  //   this.users = this.users.filter(a => a !== user);
+  //   this.userService.deleteUser(user).subscribe();
+  // }
 
   private log(message: string) {
     this.messageService.add(`Book-Detail Component: ${message}`);

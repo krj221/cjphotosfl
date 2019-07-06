@@ -1,10 +1,30 @@
 <div *ngIf="appointment && admin==true" class="module appointment-detail">
-  <h2>Appointment Details</h2>
-  <div class="appts-div">
-      <p class="detail">Name: {{appointment.first + ' ' + appointment.last}}</p>
-      <p class="detail">Email: <a href="mailto:{{appointment.email}}">{{appointment.email}}</a></p>
-      <p class="detail">Phone Number: <a href="tel:{{convertPhone(appointment.phone)}}">{{convertPhone(appointment.phone)}}</a></p>
+  <div class="heading">
+    <h2>Appointment Details</h2>
   </div>
+  <br />
+  <label class="inputLabel">First Name
+    <br />
+    <input class="input" [(ngModel)]="appointment.first" placeholder="first name...">
+  </label>
+  <br />
+  <label class="inputLabel">Last Name
+    <br />
+    <input class="input" [(ngModel)]="appointment.last" placeholder="last name...">
+  </label>
+  <br />
+  <label class="inputLabel">Email
+    <br />
+    <input class="input" [(ngModel)]="appointment.email" placeholder="email...">
+  </label>
+  <br />
+  <label class="inputLabel">Phone Number
+    <br />
+    <input class="input" [(ngModel)]="appointment.phone" placeholder="XXXXXXXXXX" maxlength="15">
+    <!-- <input class="inputPhone" #appointmentPhone1 placeholder="XXX" maxlength="3"> -
+    <input class="inputPhone" #appointmentPhone2 placeholder="XXX" maxlength="3"> -
+    <input class="inputPhone2" #appointmentPhone3 placeholder="XXXX" maxlength="4"> -->
+  </label>
   <!-- <div class="fullName"><span>Name: </span>{{appointment.first + ' ' + appointment.last}}</div>
   <br />
   <div class="fullName"><span>Email: </span>{{appointment.email}}</div>
@@ -22,6 +42,9 @@
   </div> -->
 
   <!-- [(ngModel)]="appointment.time" -->
+  <br />
+  <label class="inputLabel">Date & Time</label>
+  <br />
   <div class="mat-div">
     <mat-form-field class="mat-input-1">
       <mat-select [(ngModel)]="appointment.date" placeholder="Choose a date" required>

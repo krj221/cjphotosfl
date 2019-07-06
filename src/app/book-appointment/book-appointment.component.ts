@@ -55,9 +55,9 @@ export class BookAppointmentComponent implements OnInit {
   //     });
   // }
 
-  delete(appointment: Appointment): void {
-    this.appointments = this.appointments.filter(a => a !== appointment);
-    this.appointmentService.deleteAppointment(appointment).subscribe();
-  }
+  // delete(appointment: Appointment): void {
+  //   this.appointments = this.appointments.filter(a => a !== appointment);
+  //   this.appointmentService.deleteAppointment(appointment).subscribe();
+  // }
 
 }
