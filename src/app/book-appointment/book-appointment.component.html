@@ -19,7 +19,15 @@
 </div> -->
 <div class="module book-appointment" *ngIf="specials == null">
   <h3>Loading...</h3>
-  <a class="book-christmas" onclick="reload()">
+  <a class="book-christmas" (click)="getSpecials()">
+      <div class="specials">
+        <h2>Reload Page</h2>
+      </div>
+  </a>
+</div>
+<div class="module book-appointment" *ngIf="specials != null && specials.length == 0">
+  <h3>No Results Found</h3>
+  <a class="book-christmas" (click)="getSpecials()">
       <div class="specials">
         <h2>Reload Page</h2>
       </div>
