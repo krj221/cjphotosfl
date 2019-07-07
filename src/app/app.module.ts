@@ -37,6 +37,7 @@ import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { ApptsBySpecialsComponent } from './appts-by-specials/appts-by-specials.component';
+import { ReloadComponent } from './reload/reload.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ApptsBySpecialsComponent } from './appts-by-specials/appts-by-specials.
     SignupComponent,
     LoginComponent,
     FooterComponent,
-    ApptsBySpecialsComponent
+    ApptsBySpecialsComponent,
+    ReloadComponent
   ],
   imports: [
     BrowserModule,

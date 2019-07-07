@@ -3,6 +3,7 @@ import { Appointment } from '../appointment';
 import { AppointmentService } from '../appointment.service';
 import { Special } from '../special';
 import { SpecialService } from '../special.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-book-appointment',
@@ -17,7 +18,8 @@ export class BookAppointmentComponent implements OnInit {
 
   constructor(
     private appointmentService: AppointmentService,
-    private specialService: SpecialService
+    private specialService: SpecialService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -44,6 +46,10 @@ export class BookAppointmentComponent implements OnInit {
     const spec = new Special();
     this.specialService.getSpecials(spec)
         .subscribe(specials => this.specials = specials);
+  }
+
+  reload(): void {
+    location.reload();
   }
 
   // add(date: string): void {
