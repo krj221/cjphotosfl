@@ -12,7 +12,7 @@ const app = express();
 // console.log('No value for SEND_EMAIL_AUTH_USER yet:', process.env.SEND_EMAIL_AUTH_USER);
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load();
+  require('dotenv').config();
 }
 
 // console.log('Now the value for SEND_EMAIL_AUTH_USER is:', process.env.SEND_EMAIL_AUTH_USER);

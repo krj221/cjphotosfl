@@ -27,7 +27,7 @@ const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load();
+  require('dotenv').config();
 }
 
 // connect to mongodb database
