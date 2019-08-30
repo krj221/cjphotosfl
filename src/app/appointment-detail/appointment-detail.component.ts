@@ -110,6 +110,10 @@ export class AppointmentDetailComponent implements OnInit {
     this.saveTimeIndex = this.getTimeIndex(this.appointment.time, this.saveDateIndex, this.special);
   }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
+
   save(): void {
 
     var authDetails = JSON.parse(localStorage.getItem("authDetails"));

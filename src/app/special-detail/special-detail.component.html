@@ -1,3 +1,11 @@
+<div class="module special-detail" *ngIf="special == null && admin==true">
+  <mat-spinner style="margin:50px auto;"></mat-spinner>
+  <a (click)="reloadPage()">
+      <div class="specials">
+        <h2>Reload Page</h2>
+      </div>
+  </a>
+</div>
 <div *ngIf="special && admin==true" class="module special-detail">
   <div class="heading">
     <h2>Special Details</h2>

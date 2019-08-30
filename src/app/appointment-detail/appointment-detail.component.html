@@ -1,3 +1,12 @@
+<div class="module appointments" *ngIf="appointment == null && admin==true">
+  <!-- <h3>Loading...</h3> -->
+  <mat-spinner style="margin:50px auto;"></mat-spinner>
+  <a (click)="reloadPage()">
+      <div class="specials">
+        <h2>Reload Page</h2>
+      </div>
+  </a>
+</div>
 <div *ngIf="appointment && admin==true" class="module appointment-detail">
   <div class="heading">
     <h2>Appointment Details</h2>

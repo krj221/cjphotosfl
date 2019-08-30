@@ -35,6 +35,8 @@ import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { ApptsBySpecialsComponent } from './appts-by-specials/appts-by-specials.component';
 import { ReloadComponent } from './reload/reload.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ReloadPageComponent } from './reload-page/reload-page.component';
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import { ReloadComponent } from './reload/reload.component';
     LoginComponent,
     FooterComponent,
     ApptsBySpecialsComponent,
-    ReloadComponent
+    ReloadComponent,
+    ReloadPageComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ import { ReloadComponent } from './reload/reload.component';
     MatInputModule,
     MatRippleModule,
     MatSelectModule,
+    MatProgressSpinnerModule
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.

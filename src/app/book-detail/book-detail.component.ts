@@ -70,6 +70,10 @@ export class BookDetailComponent implements OnInit {
         .subscribe(special => this.special = special);
   }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
+
   // save(): void {
   //   this.appointmentService.updateAppointment(this.appointment)
   //     .subscribe(() => this.goBack());

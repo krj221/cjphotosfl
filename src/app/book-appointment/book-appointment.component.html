@@ -18,8 +18,9 @@
   </a>
 </div> -->
 <div class="module book-appointment" *ngIf="specials == null">
-  <h3>Loading...</h3>
-  <a class="book-christmas" (click)="getSpecials()">
+  <!-- <h3>Loading...</h3> -->
+  <mat-spinner style="margin:50px auto;"></mat-spinner>
+  <a (click)="getSpecials()">
       <div class="specials">
         <h2>Reload Page</h2>
       </div>
@@ -27,7 +28,7 @@
 </div>
 <div class="module book-appointment" *ngIf="specials != null && specials.length == 0">
   <h3>No Results Found</h3>
-  <a class="book-christmas" (click)="getSpecials()">
+  <a (click)="getSpecials()">
       <div class="specials">
         <h2>Reload Page</h2>
       </div>

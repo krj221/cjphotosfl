@@ -23,6 +23,9 @@ export class SpecialsComponent implements OnInit {
     this.getSpecials();
   }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
 
   isAuthorized(): void {
     var authDetails = JSON.parse(localStorage.getItem("authDetails"));

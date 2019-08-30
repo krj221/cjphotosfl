@@ -96,6 +96,10 @@ export class AppointmentsComponent implements OnInit {
       });
   }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
+
   // delete(appointment: Appointment): void {
   //   this.appointments = this.appointments.filter(a => a !== appointment);
   //   this.appointmentService.deleteAppointment(appointment).subscribe();

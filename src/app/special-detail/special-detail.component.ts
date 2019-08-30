@@ -52,6 +52,9 @@ export class SpecialDetailComponent implements OnInit {
     this.getAppointments();
   }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
 
   isAuthorized(): void {
     var authDetails = JSON.parse(localStorage.getItem("authDetails"));

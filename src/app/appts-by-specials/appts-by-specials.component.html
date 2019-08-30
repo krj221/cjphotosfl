@@ -1,3 +1,20 @@
+<div class="module appts-by-specials" *ngIf="specials == null">
+  <!-- <h3>Loading...</h3> -->
+  <mat-spinner style="margin:50px auto;"></mat-spinner>
+  <a (click)="getSpecials()">
+      <div class="specials">
+        <h2>Reload Page</h2>
+      </div>
+  </a>
+</div>
+<div class="module appts-by-specials" *ngIf="specials != null && specials.length == 0">
+  <h3>No Results Found</h3>
+  <a (click)="getSpecials()">
+      <div class="specials">
+        <h2>Reload Page</h2>
+      </div>
+  </a>
+</div>
 <div *ngIf="admin==true">
   <app-appointment-search></app-appointment-search>
   <div class="module appts-by-specials" *ngFor="let special of specials">

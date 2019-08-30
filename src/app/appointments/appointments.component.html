@@ -12,12 +12,23 @@
       (click)="delete(appointment)">x</button>
   </li>
 </ul> -->
-
+<div class="module appointments" *ngIf="special == null && admin==true">
+  <!-- <h3>Loading...</h3> -->
+  <mat-spinner style="margin:50px auto;"></mat-spinner>
+  <a (click)="reloadPage()">
+      <div class="specials">
+        <h2>Reload Page</h2>
+      </div>
+  </a>
+</div>
 <div *ngIf="special && admin==true" class="module appointments">
   <div class="heading">
     <h2>Appointments for {{special.name}} Special</h2>
   </div>
   <br />
+  <div *ngIf="appointments != null && appointments.length == 0">
+    <h3>No Results Found</h3>
+  </div>
   <div class="appts-div" *ngFor="let appointment of appointments" routerLink="/detail/{{appointment._id}}">
       <p class="detail">Name: {{appointment.first + ' ' + appointment.last}}</p>
       <!-- <p class="detail">Email: {{appointment.email}}</p>

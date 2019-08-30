@@ -1,3 +1,7 @@
+.spinner {
+  position: relative;
+  text-align: center;
+}
 
 /* .module {
   display: block;
@@ -82,9 +86,6 @@ h3 {
   font-size: 34px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
-}
-
-.book-christmas {
 }
 
 .specials {

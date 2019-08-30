@@ -1,3 +1,12 @@
+<div class="module book-detail" *ngIf="special == null">
+  <!-- <h3>Loading...</h3> -->
+  <mat-spinner style="margin:50px auto;"></mat-spinner>
+  <a class="book-christmas" (click)="reloadPage()">
+      <div class="specials">
+        <h2>Reload Page</h2>
+      </div>
+  </a>
+</div>
 <div *ngIf="special" class="module book-detail">
   <div class="heading">
     <h2>Book Appointment</h2>
