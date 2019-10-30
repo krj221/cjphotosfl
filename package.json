@@ -44,7 +44,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.11",
     "mem": "^5.1.1",
-    "mongoose": "^5.6.3",
+    "mongoose": "^5.7.5",
     "nodemailer": "^6.2.1",
     "npm": "^6.10.0",
     "parsejson": "0.0.3",
