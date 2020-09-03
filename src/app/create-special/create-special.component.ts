@@ -16,7 +16,7 @@ import { PICKTIMES } from '../pick-times';
 @Component({
   selector: 'app-create-special',
   templateUrl: './create-special.component.html',
-  styleUrls: ['./create-special.component.css']
+  styleUrls: ['./create-special.component.css','../app.component.css']
 })
 export class CreateSpecialComponent implements OnInit {
   @Input() special: Special;

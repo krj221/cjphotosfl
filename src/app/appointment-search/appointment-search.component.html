@@ -2,13 +2,26 @@
   <div id="search-component">
     <h3>Search by Email</h3>
     <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-
-    <ul class="search-result">
+    <!-- <ul class="search-result">
       <li *ngFor="let appointment of appointments$ | async" >
-        <a routerLink="/detail/{{appointment._id}}">
+        <a *ngIf="admin==true" routerLink="/detail/{{appointment._id}}">
           {{convertDate(appointment.date) + " at " + convertTime(appointment.time)}}
         </a>
+        <div *ngIf="admin!=true">
+          {{convertDate(appointment.date) + " at " + convertTime(appointment.time)}}
+        </div>
       </li>
-    </ul>
+    </ul> -->
+    <div *ngFor="let appointment of appointments$ | async">
+      <div *ngIf="admin==true" class="appts-div-admin" routerLink="/detail/{{appointment._id}}">
+        <p class="detail">Name: {{appointment.first + ' ' + appointment.last}}</p>
+        <p class="detail">Date: {{convertDate(appointment.date)}}</p>
+        <p class="detail">Time: {{convertTime(appointment.time)}}</p>
+      </div>
+      <div *ngIf="admin!=true" class="appts-div">
+        <p class="detail">Date: {{convertDate(appointment.date)}}</p>
+        <p class="detail">Time: {{convertTime(appointment.time)}}</p>
+      </div>
+    </div>
   </div>
 </div>

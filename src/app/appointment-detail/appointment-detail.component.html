@@ -1,3 +1,25 @@
+<div class="module appointments" *ngIf="appointment == null && admin!=true">
+  <!-- <h3>Loading...</h3> -->
+  <mat-spinner style="margin:50px auto;"></mat-spinner>
+  <a (click)="reloadPage()">
+      <div class="specials">
+        <h2>Reload Page</h2>
+      </div>
+  </a>
+</div>
+<div *ngIf="appointment && admin!=true" class="module appointment-detail">
+  <div class="heading">
+    <h2>Appointment Details</h2>
+  </div>
+  <br />
+  <div class="appts-div">
+    <p class="detail">Name: {{appointment.first + ' ' + appointment.last}}</p>
+    <p class="detail">Date: {{convertDate(appointment.date)}}</p>
+    <p class="detail">Time: {{convertTime(appointment.time)}}</p>
+  </div>
+</div>
+
+
 <div class="module appointments" *ngIf="appointment == null && admin==true">
   <!-- <h3>Loading...</h3> -->
   <mat-spinner style="margin:50px auto;"></mat-spinner>
