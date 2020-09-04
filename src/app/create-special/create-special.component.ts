@@ -86,6 +86,7 @@ export class CreateSpecialComponent implements OnInit {
 
   initializeDates(): void {
     var obj = new MyDate();
+    obj["date"] = new Date();
     obj["value"] = 0;
     obj["times"] = [];
     this.dates.push(obj);
@@ -120,7 +121,7 @@ export class CreateSpecialComponent implements OnInit {
     console.log("Name: " + name);
     for (var j = 0; j < this.dates.length; j++)
     {
-      this.dates[j].value = this.convertDateToValue(this.dates[j].value.toString());
+      this.dates[j].value = this.convertDateToValue(this.dates[j].date.toString());
       console.log('Dates: ' + this.dates[j].value );
       for (var k = 0; k < this.dates[j].times.length; k++)
       {
@@ -155,7 +156,7 @@ export class CreateSpecialComponent implements OnInit {
       // newSpecial.name = name;
       // newSpecial.photoDir = photoDir;
 
-      var dates = this.dates;
+      var dates = this.dates.sort((a, b) => a.value < b.value ? -1 : a.value > b.value ? 1 : 0);
 
       var authDetails = JSON.parse(localStorage.getItem("authDetails"));
 
@@ -186,6 +187,7 @@ export class CreateSpecialComponent implements OnInit {
   }
   addDate(): void {
     var obj = new MyDate();
+    obj["date"] = new Date();
     obj["value"] = 0;
     obj["times"] = [];
     this.dates.push(obj);

@@ -1,3 +1,6 @@
+a {
+  text-decoration: none;
+}
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -71,6 +74,16 @@ h2 {
   border-radius: 6px;
   /* padding: 10px; */
   /* color: white; */
+}
+
+.textBoxInput {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 6px 0;
+  border-radius: 6px;
+  border-width: 3px;
+  border-color: #000;
+  text-align: center;
 }
 
 .mat-input-1 {
@@ -213,4 +226,19 @@ h2 {
   cursor: pointer;
   color: #607d8b;
   font-style: italic;
+}
+
+.input {
+  font-size: 17px;
+  font-weight: bold;
+  padding: 6px 0;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border-width: 3px;
+  border-color: #000;
+  text-align: center;
+}
+
+.inputLabel {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

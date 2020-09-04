@@ -24,6 +24,7 @@ export class AppointmentDetailComponent implements OnInit {
     photoDir: '',
     description: '',
     dates: [{
+      date: new Date(),
       value: 0,
       times: [{
         value: 0,

@@ -208,3 +208,18 @@ p {
 .grid-pad > [class*='col-']:last-of-type {
   padding-right: 20px;
 }
+
+.input {
+  font-size: 17px;
+  font-weight: bold;
+  padding: 6px 0;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border-width: 3px;
+  border-color: #000;
+  text-align: center;
+}
+
+.inputLabel {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}

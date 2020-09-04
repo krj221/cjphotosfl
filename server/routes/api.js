@@ -31,7 +31,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // connect to mongodb database
-mongoose.connect(process.env.MONGODB_CONFIG, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_CONFIG,  { 
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  })
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -72,7 +75,9 @@ const Special = mongoose.model('Special', {
     name: String,
     photoDir: String,
     description: String,
-    dates: [{value: Number,
+    dates: [{
+            date: Date,
+            value: Number,
             times: [{value: Number,
                     isBooked: Boolean}]
             }]

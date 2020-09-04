@@ -121,6 +121,7 @@ export class SpecialDetailComponent implements OnInit {
 
   addDate(): void {
     var obj = new MyDate();
+    obj["date"] = new Date();
     obj["value"] = 0;
     obj["times"] = [];
     this.special.dates.push(obj);
@@ -180,9 +181,9 @@ export class SpecialDetailComponent implements OnInit {
   save(): void {
     for (var j = 0; j < this.special.dates.length; j++)
     {
-      if (this.special.dates[j].value != null && isNaN(Number(this.special.dates[j].value.toString().substring(0, 2))) )
+      if (this.special.dates[j].date != null && isNaN(Number(this.special.dates[j].date.toString().substring(0, 2))) )
       {
-        this.special.dates[j].value = this.convertDateToValue(this.special.dates[j].value.toString());
+        this.special.dates[j].value = this.convertDateToValue(this.special.dates[j].date.toString());
       }
       console.log('Dates: ' + this.special.dates[j].value );
       for (var k = 0; k < this.special.dates[j].times.length; k++)
@@ -211,6 +212,7 @@ export class SpecialDetailComponent implements OnInit {
         // .subscribe(appointments => this.changeSpecialBookings(appointments, this.special, this.specialService, this.utilityService));
 
     console.log(this.special);
+    this.special.dates = this.special.dates.sort((a, b) => a.value < b.value ? -1 : a.value > b.value ? 1 : 0);
     this.updateSpecial(this.special);
     this.goBack();
   }

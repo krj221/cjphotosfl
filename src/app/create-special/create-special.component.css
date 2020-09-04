@@ -7,27 +7,6 @@ a {
   box-sizing: border-box;
 }
 
-
-h2 {
-  position: relative;
-  font-weight: bold;
-  color: #FFF;
-  font-size: 28px;
-  text-shadow: -2px 0 black, 0 1px black, 1px 0 black, 0 -2px black;
-
-}
-
-h3 {
-  position: relative;
-  color: #FFF;
-  font-weight: bold;
-  font-style: italic;
-  text-align: center;
-  font-size: 34px;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-
-}
-
 .module {
   padding: 20px;
   text-align: center;
@@ -38,29 +17,38 @@ h3 {
   margin-left: auto;
   margin-right: auto;
   /* height: auto; */
-  max-width: 400px;
+  max-width: 500px;
   /* max-height: 800px; */
   /* min-width: 120px; */
   /* background-color: #94cdff; */
   background-color: rgba(116, 0, 179, 0.81);
-  border-radius: 2px;
+  border-radius: 1px;
   border-style: solid;
   border-width: 5px;
   border-color: #000;
   border-radius: 6px;
 }
 
+
+h2 {
+  position: relative;
+  font-weight: bold;
+  color: #FFF;
+  font-size: 20px;
+  text-shadow: -2px 0 black, 0 1px black, 1px 0 black, 0 -2px black;
+} 
+
 .heading {
   display: block;
   margin-left: auto;
   margin-right: auto;
   max-width: 340px;
-  max-height: 90px;
+  /* max-height: 90px; */
   border-style: solid;
   border-width: 5px;
   border-color: #000;
   border-radius: 6px;
-  /* padding: 0px; */
+  padding: 10px;
   /* margin-top: 15px; */
   text-align: center;
   color: #FFF;
@@ -68,17 +56,6 @@ h3 {
   min-width: 50px; */
   background-color: #94cdff;
   /* background-color: rgba(116, 0, 179, 0.81); */
-
-}
-
-.textBoxInput {
-  font-size: 20px;
-  font-weight: bold;
-  padding: 6px 0;
-  border-radius: 6px;
-  border-width: 3px;
-  border-color: #000;
-  text-align: center;
 }
 
 .mat-div {
@@ -99,12 +76,27 @@ h3 {
   /* color: white; */
 }
 
+.textBoxInput {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 6px 0;
+  border-radius: 6px;
+  border-width: 3px;
+  border-color: #000;
+  text-align: center;
+}
+
 .mat-input-1 {
   font-size: 22px;
   color: black;
   font-weight: bold;
   padding-top: 6px;
   text-align: center;
+}
+
+.fullName {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  margin-bottom: 5px;
 }
 
 .submitButton {
@@ -133,6 +125,34 @@ h3 {
   cursor: pointer;
   font-style: italic;
 }
+
+.deleteButton {
+  border-width: 3px;
+  border-color: #000;
+  border-radius: 6px;
+  background-color: #f00;
+  /* background-color: rgba(116, 0, 179, 0.81); */
+  color: #FFF;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 10px 5px 10px;
+  /* width: 200px;
+  height: 40px; */
+  border-style: solid;
+  border-width: 3px;
+  border-color: #000;
+  border-radius: 5px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  -moz-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+  -webkit-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+}
+.deleteButton:hover {
+  background-color: #505;
+  cursor: pointer;
+  font-style: italic;
+}
+
 .addButton {
   border-width: 3px;
   border-color: #000;
@@ -150,9 +170,6 @@ h3 {
   border-color: #000;
   border-radius: 5px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  -moz-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
-  -webkit-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
-  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
 }
 .addButton:hover {
   background-color: #505;
@@ -176,12 +193,52 @@ h3 {
   border-color: #000;
   border-radius: 5px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  -moz-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
-  -webkit-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
-  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
 }
 .removeButton:hover {
   background-color: #505;
   cursor: pointer;
   font-style: italic;
+}
+
+.specials {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 22px;
+  font-weight: bold;
+  max-width: 400px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #000;
+  border-radius: 6px;
+  text-align: center;
+  color: #FFF;
+  background-color: #94cdff;
+  /* background-color: rgba(116, 0, 179, 0.81); */
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  -moz-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+  -webkit-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+
+}
+.specials:hover {
+  background-color: #505;
+  cursor: pointer;
+  color: #607d8b;
+  font-style: italic;
+}
+
+.input {
+  font-size: 17px;
+  font-weight: bold;
+  padding: 6px 0;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border-width: 3px;
+  border-color: #000;
+  text-align: center;
+}
+
+.inputLabel {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

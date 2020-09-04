@@ -28,11 +28,11 @@
   <br />
   <label class="inputLabel">Date & Times</label>
   <br />
-  <div class="mat-div" *ngFor="let date of special.dates; let i = index;">
+  <div class="mat-div" *ngFor="let date of special.dates">
     <mat-form-field class="mat-input-1">
-      <input matInput [matDatepicker]="i" placeholder="{{convertDate(date.value)}}" [(ngModel)]="date.value">
-      <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
-      <mat-datepicker #i></mat-datepicker>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="date.date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="mat-input-1">
       <mat-select placeholder="Choose times" [(ngModel)]="date.times" multiple>
