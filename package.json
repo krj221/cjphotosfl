@@ -42,7 +42,7 @@
     "helmet": "^3.23.3",
     "js-yaml": "^3.14.0",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mem": "^5.1.1",
     "mongoose": "^5.9.23",
     "nodemailer": "^6.4.10",
